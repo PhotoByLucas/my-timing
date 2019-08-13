@@ -1,0 +1,56 @@
+<template>
+  <div id="app">
+
+    <router-view />
+
+    <!-- 底部栏目 -->
+    <mt-tabbar v-model="tabbar" :fixed="true">
+      <mt-tab-item v-for="(item, index) in tabItems" :key="index" :id="item.id">
+        <img slot="icon" :src="`../static/icons/${item.id}.png`" />
+        {{item.label}}
+      </mt-tab-item>
+    </mt-tabbar>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data () {
+    return {
+      tabbar: 'home',
+      screenHeight: document.body.clientHeight, // 设置屏幕高度
+      tabItems: [
+        {
+          id: 'home',
+          label: '首页'
+        },
+        {
+          id: 'message',
+          label: '消息'
+        },
+        {
+          id: 'personCenter',
+          label: '个人中心'
+        }
+      ]
+    }
+  },
+  watch: {
+    tabbar: function (val) {
+      this.$router.push(`${val}`)
+    }
+  }
+}
+</script>
+
+<style>
+#app {
+  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
+  /* color: #2c3e50; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+</style>
