@@ -1,24 +1,28 @@
 <template>
   <div>
     <!-- 头部 -->
-    <x-header >首页</x-header>
+    <div class="fixed-item" ref="fixedItem">
+      <x-header>首页</x-header>
 
-    <div style="height:20px"></div>
+      <div style="height:20px"></div>
 
-    <!-- 标签行 -->
-    <flexbox :gutter="0" wrap="wrap" justify="space-around">
-      <flexbox-item
-        :span="1/2.3"
-        v-for="(item, index) in secondCardList"
-        :key="index"
-        class="yuan-jiao"
-        :style="`background-color:${item.color}`"
-      >
-        <div class="second-Card-label">{{item.label}}</div>
-      </flexbox-item>
-    </flexbox>
+      <!-- 标签行 -->
+      <flexbox :gutter="0" wrap="wrap" justify="space-around">
+        <flexbox-item
+          :span="1/2.3"
+          v-for="(item, index) in secondCardList"
+          :key="index"
+          class="yuan-jiao"
+          :style="`background-color:${item.color}`"
+        >
+          <div class="second-Card-label">{{item.label}}</div>
+        </flexbox-item>
+      </flexbox>
+      <cell title="推荐小组" disabled></cell>
+    </div>
 
-    <cell title="推荐小组" disabled></cell>
+    <div :style="`height:${fixedItemHeight}px`"></div>
+
     <panel class="my-panel" :list="panelList" type="1" style="margin-top: 0px "></panel>
   </div>
 </template>
@@ -27,6 +31,7 @@ export default {
   name: 'home',
   data () {
     return {
+      fixedItemHeight: 0, // 头部固定部分高度
       // 第二行标签
       secondCardList: [
         {
@@ -153,6 +158,9 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    this.fixedItemHeight = this.$refs.fixedItem.offsetHeight// 动态获取高度
   }
 }
 </script>
@@ -173,8 +181,10 @@ export default {
   font-size: 20px;
   color: white;
 }
-/deep/ .weui-panel {
-  margin-top: 0px !important;
-  overflow: auto;
+.fixed-item {
+  position: fixed !important;
+  width: 100%;
+  z-index: 999;
+  background-color: white;
 }
 </style>

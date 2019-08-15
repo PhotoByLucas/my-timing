@@ -5,7 +5,7 @@
     <!-- 将底部fix然后加一个div补上 -->
     <div style="height:50px"></div>
     <!-- 底部栏目 -->
-    <tabbar>
+    <tabbar style="position:fixed">
       <tabbar-item  v-for="(item, index) in tabItems" :key="index" :id="item.id" :link="`/${item.id}`">
         <img slot="icon" :src="`../static/icons/${item.id}.png`" />
         <span slot="label">{{item.label}}</span>
@@ -47,8 +47,6 @@ export default {
 
 <style>
 #app {
-  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
-  /* color: #2c3e50; */
   width: 100%;
   height: 100%;
   position: absolute;
