@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-
     <router-view />
 
+    <!-- 将底部fix然后加一个div补上 -->
+    <div style="height:50px"></div>
     <!-- 底部栏目 -->
-    <mt-tabbar v-model="tabbar" :fixed="true">
-      <mt-tab-item v-for="(item, index) in tabItems" :key="index" :id="item.id">
+    <tabbar>
+      <tabbar-item  v-for="(item, index) in tabItems" :key="index" :id="item.id" :link="`/${item.id}`">
         <img slot="icon" :src="`../static/icons/${item.id}.png`" />
-        {{item.label}}
-      </mt-tab-item>
-    </mt-tabbar>
-
+        <span slot="label">{{item.label}}</span>
+      </tabbar-item>
+    </tabbar>
   </div>
 </template>
 
